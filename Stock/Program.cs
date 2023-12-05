@@ -1,5 +1,4 @@
 ﻿using Stock;
-using System.Diagnostics.CodeAnalysis;
 
 var filePath = "Phones.csv";
 var lines = File.ReadAllLines(filePath);
@@ -19,18 +18,15 @@ foreach (var line in lines.Skip(1))
 }
 
 // Console-ban kérjük be, hogy melyik termék árát akarjuk módosítani
-int productId;
 Product product;
 do
 {
     Console.WriteLine("Melyik telefon árát szeretnénk módosítani? (Id)");
-    if (int.TryParse(Console.ReadLine(), out productId))
+    if (int.TryParse(Console.ReadLine(), out int productId))
     {
-        product = allProducts. (product => product.Id == productId);
-        if (product is not null )
-        {
+        product = allProducts.FirstOrDefault(product => product.Id == productId);
+        if (product is not null)
             break;
-        }
 
         Console.WriteLine("Telefon nem található");
         continue;
